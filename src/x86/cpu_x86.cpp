@@ -68,6 +68,7 @@ bool cpu_x86::detect_OS_x64(){
 
 cpu_x86::cpu_x86(){
     memset(this, 0, sizeof(*this));
+    detect_host();
 }
 bool cpu_x86::detect_OS_AVX(){
     //  Copied from: http://stackoverflow.com/a/22521619/922184
@@ -244,9 +245,7 @@ void cpu_x86::print() const{
     cout << endl;
 }
 void cpu_x86::print_host(){
-    cpu_x86 features;
-    features.detect_host();
-    features.print();
+    instance().print();
 }
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,9 +1,9 @@
 /* cpu_x86.h
- * 
+ *
  * Author           : Alexander J. Yee
  * Date Created     : 04/12/2014
  * Last Modified    : 04/12/2014
- * 
+ *
  */
 
 #pragma once
@@ -71,17 +71,22 @@ struct cpu_x86{
     bool HW_AVX512_IFMA;
     bool HW_AVX512_VBMI;
 
-public:
-    cpu_x86();
-    void detect_host();
+    static cpu_x86& instance()
+    {
+        static cpu_x86 inst;
+        return inst;
+    }
 
-    void print() const;
     static void print_host();
 
     static void cpuid(int32_t out[4], int32_t x);
     static std::string get_vendor_string();
 
 private:
+    cpu_x86();
+    void print() const;
+    void detect_host();
+
     static void print(const char* label, bool yes);
 
     static bool detect_OS_x64();
